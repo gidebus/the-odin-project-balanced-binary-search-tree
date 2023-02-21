@@ -7,9 +7,9 @@ let(:node) { Node.new('root node', left_node, right_node) }
 let(:left_node) { Node.new('left node') }
 let(:right_node) { Node.new('right node') }
 
-  describe '#value' do
-    it 'returns the value of the node' do
-      expect(node.value).to eq('root node')
+  describe '#data' do
+    it 'returns the data of the node' do
+      expect(node.data).to eq('root node')
     end
   end
 

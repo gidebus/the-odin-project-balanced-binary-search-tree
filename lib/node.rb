@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-# Node class including a value, left, and right nodes.
+# Node class including a data, left, and right nodes.
 class Node
-  attr_accessor :value, :left_node, :right_node
+  attr_accessor :data, :left_node, :right_node
 
   def initialize(
-    value = nil, 
+    data = nil, 
     left_node = nil,
     right_node = nil
   )
-    @value = value
+    @data = data
     @left_node = left_node
     @right_node = right_node
   end
