@@ -2,6 +2,8 @@
 
 # Node class including a value, left, and right nodes.
 class Node
+  attr_accessor :value, :left_node, :right_node
+
   def initialize(
     value = nil, 
     left_node = nil,
