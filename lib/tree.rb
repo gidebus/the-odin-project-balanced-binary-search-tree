@@ -11,16 +11,14 @@ class Tree
     @root = build_tree(@array)
   end
 
-  def build_tree(arr_of_nodes)
-    return Node.new(arr_of_nodes.first) if arr_of_nodes.length <= 1
+  def build_tree(arr)
+    return Node.new(arr.first) if arr.length <= 1
 
-    midpoint = (arr_of_nodes.length / 2).round
-    root = Node.new(arr_of_nodes[midpoint])
-    left = build_tree(arr_of_nodes[0...midpoint])
-    right = build_tree(arr_of_nodes[(midpoint + 1)..arr_of_nodes.length - 1])       
+    midpoint = (arr.length) / 2
+    root = Node.new(arr[midpoint])
 
-    root.left_node = left
-    root.right_node = right
+    root.left_node = build_tree(arr.take(midpoint))
+    root.right_node = build_tree(arr.drop(midpoint + 1))        
 
     root
   end
@@ -32,8 +30,3 @@ class Tree
   end
   
 end
-
-arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324] # => [1, 3, 4, 5, 7, 8, 9, 23, 67, 324, 6345]
-tree = Tree.new(arr)
-tree.pretty_print
-p tree.array
