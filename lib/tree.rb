@@ -16,10 +16,8 @@ class Tree
 
     midpoint = (arr.length) / 2
     root = Node.new(arr[midpoint])
-
     root.left_node = build_tree(arr.take(midpoint))
-    root.right_node = build_tree(arr.drop(midpoint + 1))        
-
+    root.right_node = build_tree(arr.drop(midpoint + 1))
     root
   end
 
@@ -30,12 +28,22 @@ class Tree
   end
   
   def insert(value)
+    return nil if value < 1
+    return find(value) unless find(value).nil?
+   
     new_node = Node.new(value)
-    # we always insert at leafs
-    # if number already exists we do not add anything
-    # set as left node if value is nil
-    # if node.left_node.nil?
-    # set as right if node value is nil
+    return @root = new_node if @root.nil?
+    node = @root
+
+    until node.nil?
+      if value < node.data
+        return node.left_node = new_node if node.left_node.nil?
+        node = node.left_node
+      elsif value > node.data
+        return node.right_node = new_node if node.right_node.nil?
+        node = node.right_node
+      end
+    end
   end
 
   def find(value)
@@ -51,12 +59,9 @@ class Tree
 
 end
 
-# arr = [1, 3, 5, 7, 8] 
-# t = Tree.new(arr)
-# t.pretty_print
-# p t.find(100)
-# p t.find(-100)
-# p t.find(5)
-# p t.find(3)
-# p t.find(1)
-# p t.find(7)
+arr = [1, 3, 5, 7, 8] 
+t = Tree.new(arr)
+t.pretty_print
+t.insert(9)
+puts ''
+t.pretty_print

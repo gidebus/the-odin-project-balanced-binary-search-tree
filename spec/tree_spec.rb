@@ -49,8 +49,37 @@ describe Tree do
   end
 
   describe '#insert' do
-    xit 'inserts a node into the tree' do
+    it 'inserts a node into the tree' do
+      expect(tree.find(9)).to be(nil)
+      tree.insert(9)
+      expect(tree.find(9).data).to eq(9)
+    end
 
+    it 'inserts a lower node into the left branch' do
+      left_root_node = tree.find(3)
+      expect(left_root_node.right_node).to eq(nil)
+      tree.insert(4)
+      expect(left_root_node.right_node.data).to eq(4)
+    end
+
+    it 'inserts a higher node into the right branch' do
+      right_root_node = tree.find(8)
+      expect(right_root_node.right_node).to eq(nil)
+      tree.insert(9)
+      expect(right_root_node.right_node.data).to eq(9)
+    end
+
+    it 'returns nil if insert value is lower than 0' do
+      expect(tree.insert(-1)).to eq(nil)
+      expect(tree.insert(0)).to eq(nil)
+    end
+
+    it 'does not duplicate a node that already exists' do
+      right_root_node = tree.find(8)
+      tree.insert(8)
+      expect(right_root_node.left_node).not_to eq(8)
+      expect(right_root_node.right_node).not_to eq(8)
+      expect(right_root_node.left_node.right_node).not_to eq(8)
     end
   end
 
