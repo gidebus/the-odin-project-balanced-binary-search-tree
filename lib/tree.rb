@@ -12,7 +12,7 @@ class Tree
   end
 
   def build_tree(arr)
-    return Node.new(arr.first) if arr.length <= 1
+    return if arr.empty?
 
     midpoint = (arr.length) / 2
     root = Node.new(arr[midpoint])
@@ -29,4 +29,38 @@ class Tree
     pretty_print(node.left_node, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left_node
   end
   
+  def insert(value)
+    new_node = Node.new(value)
+    # we always insert at leafs
+    # if number already exists we do not add anything
+  end
+
+  def find(value)
+    node = @root
+
+    until node.nil?
+      return nil if node.nil?
+      return node if node.data == value
+      if value < node.data
+        # set as left node if value is nil
+        # if node.left_node.nil?
+        # end
+        node = node.left_node
+      elsif value > node.data
+        # set as right if node value is nil
+        node = node.right_node
+      end
+    end
+  end
+
 end
+
+# arr = [1, 3, 5, 7, 8] 
+# t = Tree.new(arr)
+# t.pretty_print
+# p t.find(100)
+# p t.find(-100)
+# p t.find(5)
+# p t.find(3)
+# p t.find(1)
+# p t.find(7)
