@@ -33,6 +33,9 @@ class Tree
     new_node = Node.new(value)
     # we always insert at leafs
     # if number already exists we do not add anything
+    # set as left node if value is nil
+    # if node.left_node.nil?
+    # set as right if node value is nil
   end
 
   def find(value)
@@ -41,15 +44,8 @@ class Tree
     until node.nil?
       return nil if node.nil?
       return node if node.data == value
-      if value < node.data
-        # set as left node if value is nil
-        # if node.left_node.nil?
-        # end
-        node = node.left_node
-      elsif value > node.data
-        # set as right if node value is nil
-        node = node.right_node
-      end
+      node = node.left_node if value < node.data  
+      node = node.right_node if value > node.data
     end
   end
 
