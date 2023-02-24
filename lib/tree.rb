@@ -57,11 +57,31 @@ class Tree
     end
   end
 
+  def delete(value)
+    # return nil if value is not on tree
+    # return nil if value is negative or zero
+    # find predecessor of node to be deleted
+    # delete if deleted_node has no children
+    # replace child with deleted_node if it has one child
+    # if deleted_node has two children
+    #   search for the next highest node in the deleted_node tree
+    #   delete that selected node or move it to the deleted_node place
+    #   reconnect nodes with new selected node
+
+    # one child  or two could be done with one single code
+    # no need for new code 
+    
+    deleted_node = find(value)
+    if deleted_node.left_node.nil? && deleted_node.right_node.nil?
+    end
+  end
+
 end
 
-arr = [1, 3, 5, 7, 8] 
-t = Tree.new(arr)
-t.pretty_print
-t.insert(9)
-puts ''
-t.pretty_print
+# TODO Delete after:
+# arr = [1, 3, 5, 7, 8] 
+# t = Tree.new(arr)
+# t.pretty_print
+# t.insert(9)
+# puts ''
+# t.pretty_print

@@ -84,6 +84,17 @@ describe Tree do
   end
 
   describe '#delete' do
+    it 'deletes a value with no children' do
+      expect(tree.find(1).data).to be(1)
+      tree.delete(1)
+      expect(tree.find(1)).to be(nil)
+    end
+
+    xit 'replaces the deleted node with its successor if it only has one child' do
+    end
+
+    xit 'replaces the deleted node with the next in-sequence node by value if deleted node has two children' do
+    end
   end
 
   describe '#level_order' do
@@ -109,8 +120,4 @@ describe Tree do
 
   describe '#rebalance' do
   end
-
-  describe '#build_tree' do
-  end
-
 end
