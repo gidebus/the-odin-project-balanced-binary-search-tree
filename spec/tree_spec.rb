@@ -206,9 +206,9 @@ describe Tree do
 
     context 'a block is given' do
       it 'yields each node into the block' do
-        expect(tree.root.data).to eq(5)
-        tree.level_order { |node| node.data = node.data + 1 }
-        expect(tree.root.data).to eq(6)
+        nodes = [5, 3, 8, 1, 7]
+        expect(tree.level_order).to eq(nodes)
+        tree.level_order { |node| node.data += 1 }
         expected = [6, 4, 9, 2, 8]
         expect(tree.level_order).to eq(expected)
       end
@@ -216,12 +216,54 @@ describe Tree do
   end
 
   describe '#inorder' do
+    context 'when a block is given' do
+      it 'yields the node' do
+        expected = [2, 4, 6, 8, 9]
+        tree.inorder { |node| node.data += 1 }
+        expect(tree.inorder).to eq(expected)
+      end
+    end
+
+    context 'when a block is not given' do
+      it 'returns an array' do
+        expected = [1, 3, 5, 7, 8]
+        expect(tree.inorder).to eq(expected)
+      end
+    end
   end
   
   describe '#preorder' do
+    context 'when a block is given' do
+      it 'yields the node' do
+        expected = [6, 4, 2, 9, 8]
+        tree.preorder { |node| node.data += 1 }
+        expect(tree.preorder).to eq(expected)
+      end
+    end
+
+    context 'when a block is not given' do
+      it 'returns an array' do
+        expected = [5, 3, 1, 8, 7]
+        expect(tree.preorder).to eq(expected)
+      end
+    end
   end
   
   describe '#postorder'do
+  context 'when a block is given' do
+    it 'yields the node' do
+      expected = [2, 4, 8, 9, 6]
+      tree.postorder { |node| node.data += 1 }
+      expect(tree.postorder).to eq(expected)
+    end
+  end
+
+  context 'when a block is not given' do
+    it 'returns an array' do
+      expected = [1, 3, 7, 8, 5]
+      expect(tree.postorder).to eq(expected)
+    end
+  end
   end
 
   describe '#height' do

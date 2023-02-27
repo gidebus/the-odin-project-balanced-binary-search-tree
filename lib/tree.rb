@@ -127,6 +127,36 @@ class Tree
     end
     result unless block_given?
   end
+
+  def inorder(node = @root, result = [], &block)
+    return if node.nil?
+
+    inorder(node.left_node, result, &block)
+    result.push(block_given? ? yield(node) : node.data)
+    inorder(node.right_node, result, &block)
+
+    result
+  end
+
+  def preorder(node = @root, result = [], &block)
+    return if node.nil?
+
+    result.push(block_given? ? yield(node) : node.data)
+    preorder(node.left_node, result, &block)
+    preorder(node.right_node, result, &block)
+
+    result
+  end
+
+  def postorder(node = @root, result = [], &block)
+    return if node.nil?
+
+    postorder(node.left_node, result, &block)
+    postorder(node.right_node, result, &block)
+    result.push(block_given? ? yield(node) : node.data)
+
+    result
+  end
 end
 
 # TODO Delete after:
@@ -135,4 +165,3 @@ end
 # t = Tree.new(arr)
 # t.pretty_print
 # puts ''
-# t.level_order()
