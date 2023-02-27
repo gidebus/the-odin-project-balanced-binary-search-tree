@@ -197,6 +197,22 @@ describe Tree do
   end
 
   describe '#level_order' do
+    context 'no block given' do
+      it 'returns a balanced array' do
+        expected = [5, 3, 8, 1, 7]
+        expect(tree.level_order).to eq(expected)
+      end
+    end
+
+    context 'a block is given' do
+      it 'yields each node into the block' do
+        expect(tree.root.data).to eq(5)
+        tree.level_order { |node| node.data = node.data + 1 }
+        expect(tree.root.data).to eq(6)
+        expected = [6, 4, 9, 2, 8]
+        expect(tree.level_order).to eq(expected)
+      end
+    end
   end
 
   describe '#inorder' do

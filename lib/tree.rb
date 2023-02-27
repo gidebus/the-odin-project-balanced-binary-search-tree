@@ -112,16 +112,27 @@ class Tree
     return node if node.left_node.nil?
     find_next_node_in_sequence(node.left_node)
   end
+
+  def level_order(node = @root)
+    return nil if node.nil?
+    queue = []
+    result = []
+    queue.push(node)
+
+    until queue.empty? do
+      node = queue.shift
+      block_given? ? yield(node) : result.push(node.data)
+      queue.push(node.left_node) unless node.left_node.nil?
+      queue.push(node.right_node) unless node.right_node.nil?
+    end
+    result unless block_given?
+  end
 end
 
 # TODO Delete after:
-arr = [1, 3, 5, 7, 8] 
-# arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ] 
-t = Tree.new(arr)
-# t.insert(9)
-t.pretty_print
-# puts ''
-# t.delete(8)
-# puts ''
+# arr = [1, 3, 5, 7, 8] 
+# arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] 
+# t = Tree.new(arr)
 # t.pretty_print
 # puts ''
+# t.level_order()
