@@ -85,15 +85,23 @@ describe Tree do
 
   describe '#delete' do
     it 'deletes a value with no children' do
-      expect(tree.find(1).data).to be(1)
+      expect(tree.find(1).data).to eq(1)
       tree.delete(1)
-      expect(tree.find(1)).to be(nil)
+      expect(tree.find(1)).to eq(nil)
     end
 
-    xit 'replaces the deleted node with its successor if it only has one child' do
+    it 'replaces the deleted node with its successor if it only has one child' do
+      expect(tree.right_node.data).to eq(8)
+      tree.delete(8)
+      expect(tree.right_node.data).to eq(7)
     end
 
-    xit 'replaces the deleted node with the next in-sequence node by value if deleted node has two children' do
+    it 'replaces the deleted node with the next in-sequence node by value if deleted node has two children' do
+      tree.insert(9)
+      expect(tree.right_node.data).to eq(8)
+      tree.delete(8)
+      expect(tree.right_node.data).to eq(7)
+      expect(tree.right_node.right_node.data).to eq(9)
     end
   end
 
