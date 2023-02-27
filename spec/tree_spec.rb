@@ -105,6 +105,97 @@ describe Tree do
     end
   end
 
+  describe '#find_predecessor_node' do
+    it 'returns the parent node' do
+      parent_node = tree.find_predecessor_node(1)
+      expect(parent_node.data).to eq(3)
+    end
+
+    it 'returns nil if the root node is selected' do
+      expect(tree.find_predecessor_node(5)).to eq(nil)
+    end
+  end
+
+  describe '#node_has_no_child?' do 
+    it 'returns true if node has no child' do
+      no_child_node = tree.find(1)
+      expect(tree.node_has_no_child?(no_child_node)).to be(true)
+    end
+
+    it 'returns false if node has at least one child' do
+      single_child_node = tree.find(3)
+      double_child_node = tree.find(5)
+      expect(tree.node_has_no_child?(single_child_node)).to be(false)
+      expect(tree.node_has_no_child?(double_child_node)).to be(false)
+    end
+  end
+
+  describe '#node_has_one_child?' do
+    it 'returns true if node has one child' do
+      single_child_node = tree.find(3)
+      expect(tree.node_has_one_child?(single_child_node)).to be(true)
+    end
+
+    it 'returns false if node has none or two children' do
+      double_child_node = tree.find(5)
+      no_child_node = tree.find(1)
+      expect(tree.node_has_one_child?(double_child_node)).to be(false)
+      expect(tree.node_has_one_child?(no_child_node)).to be(false)
+    end
+  end
+
+  describe '#node_has_two_children?' do
+    it 'returns true if node has two children' do
+      double_child_node = tree.find(5)
+      expect(tree.node_has_two_children?(double_child_node)).to be(true)
+    end
+
+    it 'returns false if node has one or no children' do
+      no_child_node = tree.find(1)
+      single_child_node = tree.find(3)
+      expect(tree.node_has_two_children?(no_child_node)).to be(false)
+      expect(tree.node_has_two_children?(single_child_node)).to be(false)
+    end
+  end
+
+  describe '#find_next_node_in_sequence' do
+    it 'returns the next highest node' do
+      node = tree.find(5)
+      expect(tree.find_next_node_in_sequence(node.right_node).data).to eq(7)
+    end
+  end
+
+  describe '#delete_no_children_node' do
+    it 'deletes a node with no children' do
+      node = tree.find(7)
+      parent_node = tree.find(8)
+      expect(node).to be_an_instance_of(Node)
+      tree.delete_no_children_node(node, parent_node)
+      expect(parent_node.left_node).to be(nil)
+    end
+  end
+
+  describe '#delete_single_child_node' do
+    it 'deletes a node with one child' do
+      node = tree.find(8)
+      parent_node = tree.find(5)
+      expect(node).to be_an_instance_of(Node)
+      tree.delete_single_child_node(node, parent_node)
+      expect(parent_node.right_node.data).to be(7)
+    end
+  end 
+  
+  describe '#delete_double_child_node' do
+    it 'deletes a node with two children' do
+      node = tree.find(8)
+      parent_node = tree.find(5)
+      tree.insert(9)
+      expect(node).to be_an_instance_of(Node)
+      tree.delete_double_child_node(node, parent_node)
+      expect(parent_node.right_node.data).to be(9)
+    end
+  end
+
   describe '#level_order' do
   end
 

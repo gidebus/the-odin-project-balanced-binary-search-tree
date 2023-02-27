@@ -58,7 +58,7 @@ class Tree
   end
 
   def find_predecessor_node(value, node = @root)
-    return nil if @root == value
+    return nil if @root.data == value
     
     until node.nil? do
       return node if node.left_node.data == value || node.right_node.data == value
@@ -115,11 +115,11 @@ class Tree
 end
 
 # TODO Delete after:
-# arr = [1, 3, 5, 7, 8] 
+arr = [1, 3, 5, 7, 8] 
 # arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ] 
-# t = Tree.new(arr)
+t = Tree.new(arr)
 # t.insert(9)
-# t.pretty_print
+t.pretty_print
 # puts ''
 # t.delete(8)
 # puts ''
