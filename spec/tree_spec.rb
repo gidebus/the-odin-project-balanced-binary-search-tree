@@ -250,26 +250,32 @@ describe Tree do
   end
   
   describe '#postorder'do
-  context 'when a block is given' do
-    it 'yields the node' do
-      expected = [2, 4, 8, 9, 6]
-      tree.postorder { |node| node.data += 1 }
-      expect(tree.postorder).to eq(expected)
+    context 'when a block is given' do
+      it 'yields the node' do
+        expected = [2, 4, 8, 9, 6]
+        tree.postorder { |node| node.data += 1 }
+        expect(tree.postorder).to eq(expected)
+      end
     end
-  end
 
-  context 'when a block is not given' do
-    it 'returns an array' do
-      expected = [1, 3, 7, 8, 5]
-      expect(tree.postorder).to eq(expected)
+    context 'when a block is not given' do
+      it 'returns an array' do
+        expected = [1, 3, 7, 8, 5]
+        expect(tree.postorder).to eq(expected)
+      end
     end
-  end
   end
 
   describe '#height' do
+    it 'returns the height' do
+      expect(tree.height).to eq(2)
+    end
   end
 
   describe '#depth' do
+    it 'returns the depth' do
+      expect(tree.depth).to eq(2)
+    end
   end
 
   describe '#balanced?' do
