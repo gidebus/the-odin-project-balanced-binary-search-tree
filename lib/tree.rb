@@ -162,7 +162,7 @@ class Tree
     return count if node.nil?
 
     count += 1
-    
+
     left = height(node.left_node, count)
     right = height(node.right_node, count)
     left < right ? right : left
@@ -178,11 +178,15 @@ class Tree
     right = depth(node.right_node, count)
     left < right ? right : left
   end
-end
 
-# TODO Delete after:
-arr = [1, 3, 5, 7, 8] 
-# arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] 
-t = Tree.new(arr)
-# t.pretty_print
-# puts ''
+  def balanced?
+    left = height(@root.left_node, 0) 
+    right = height(@root.right_node, 0)
+    (left - right).between?(-1, 1)
+  end
+
+  def rebalance
+    nodes = inorder
+    @root = build_tree(nodes)
+  end
+end

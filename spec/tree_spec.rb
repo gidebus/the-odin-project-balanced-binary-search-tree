@@ -279,8 +279,26 @@ describe Tree do
   end
 
   describe '#balanced?' do
+    it 'returns true if tree is balanced' do
+      expect(tree.balanced?).to eq(true)
+    end
+
+    it 'returns false if tree is not balanced' do
+      tree.insert(10)
+      tree.insert(11)
+      tree.insert(12)
+      expect(tree.balanced?).to eq(false)
+    end
   end
 
   describe '#rebalance' do
+    it 'rebalances a tree' do
+      tree.insert(10)
+      tree.insert(11)
+      tree.insert(12)
+      expect(tree.balanced?).to eq(false)
+      tree.rebalance
+      expect(tree.balanced?).to eq(true)
+    end
   end
 end
