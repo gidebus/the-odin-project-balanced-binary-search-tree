@@ -1,0 +1,56 @@
+# frozen_string_literal: true
+
+require_relative '../lib/node.rb'
+require_relative '../lib/tree.rb'
+
+puts '1. Create a binary search tree from an array of random numbers'
+arr = Array.new(15) { rand(1..100) }
+puts "Array: #{arr}"
+tree = Tree.new(arr)
+puts ''
+puts '2. Confirm that the tree is balanced by calling `#balanced?`'
+puts tree.balanced?
+puts ''
+puts '3. Print out all elements in level, pre, post, and in order'
+puts ''
+puts 'Level Order:'
+p tree.level_order
+puts ''
+puts 'Pre Order:'
+p tree.preorder
+puts ''
+puts 'Post Order:'
+p tree.postorder
+puts ''
+puts 'In Order:'
+p tree.inorder
+puts ''
+puts '4. Unbalance the tree by adding several numbers > 100'
+puts "#{tree.insert(126)}"
+puts "#{tree.insert(157)}"
+puts "#{tree.insert(300)}"
+puts "#{tree.insert(455)}"
+puts "#{tree.insert(500)}"
+puts ''
+puts '5. Confirm that the tree is unbalanced by calling `#balanced?`'
+puts tree.balanced?
+puts ''
+puts '6. Balance the tree by calling `#rebalance`'
+tree.rebalance
+puts ''
+puts '7. Confirm that the tree is balanced by calling `#balanced?`'
+puts tree.balanced?
+puts ''
+puts '8. Print out all elements in level, pre, post, and in order'
+puts ''
+puts '#level_order:'
+p tree.level_order
+puts ''
+puts '#preorder:'
+p tree.preorder
+puts ''
+puts '#postrder:'
+p tree.postorder
+puts ''
+puts '#inorder:'
+p tree.inorder
